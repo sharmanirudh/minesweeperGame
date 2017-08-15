@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Minesweeper</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="jquery-3.2.1.min.js"></script>
 </head>
 <body>
   
@@ -26,9 +27,11 @@
       border-left: medium solid #ffffff;
       background-color: black;
       width: 268px;
-      height: 311px;
+      height: 324px;
     }
     .playBox {
+      display: flex;
+      flex-direction: column;
       width: -webkit-fill-available;
       height: -webkit-fill-available;
       border-style: inset;
@@ -37,8 +40,11 @@
     }
     #timeBox {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: -webkit-fill-available;
-      height: 32px;
+      height: 46px;
       border-style: inset;
       border-top: medium solid #7b7b7b;
       border-right: medium solid #ffffff;
@@ -67,6 +73,8 @@
     }
     .closeBox {
       display: flex;
+      justify-content: center;
+      align-items: center;
       width: 24px;
       height: 24px;
       border-top: medium solid #ffffff;
@@ -78,6 +86,8 @@
     }
     .zeroBox {
       display: flex;
+      justify-content: center;
+      align-items: center;
       width: 26px;
       height: 26px;
       border-style: solid;
@@ -87,9 +97,7 @@
       
       font-family: "lilliput steps";
       font-weight: bold;
-      font-size: 26px;
-      justify-content: center;
-      align-items: center;
+      font-size: 22px;
     }
     .one {
       color: #0000ff;
@@ -118,10 +126,14 @@
     
   </style>
   
-<div id="borderBox">
+<div id="borderBox" oncontextmenu="return false;">
   <div class="playBox">
       
-      <div id="timeBox"></div>
+      <div id="timeBox">
+        <div id="minesLeft"></div>
+        <div id="emoticon"><img src='smiley.gif' height=40px width=40px></div>
+        <div id="timelapsed"></div>
+      </div>
       <div class="separator"></div>
       <div id="mineBox">
         <div class='closeBox' id='0'></div>
@@ -236,15 +248,29 @@
       [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
     ];
 
-  var bombs = [ 1,2,3,8,9,10,18,19,20,23,31,35,27,29,57,72,80,76,50,36,37,38,60,61];
-
-  function bomFinder(i,j) {
-    var k = 0;
-    for(k = 0; k < bombs.length; k++) {
-      if(a[i][j] == bombs[k]) {
-        return 1;
+  function getRandomMinePositions(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  function setRandomMinePositions() {
+    var newRandomMinePosition = 0, x = 0, y = 0;
+    for(var i = 0; i < 50; i++) {
+      newRandomMinePosition = getRandomMinePositions(0,80);
+      x = parseInt(newRandomMinePosition/9);
+      y = newRandomMinePosition%9;
+      if(opened[x][y] == 'm') {
+        i--;
+      }else {
+        opened[x][y] = 'm';
       }
     }
+  }
+  setRandomMinePositions();
+
+  function bomFinder(i,j) {
+    if(opened[i][j] == 'm')
+      return 1;
     return 0;
   };
 
@@ -358,7 +384,7 @@
 
 
 
-    $('#'+a[i][j]).addClass('zeroBox');
+    $('#'+(i*9 + j)).addClass('zeroBox');
     var enclosingBombsClassEquivalent = '';
     if(adjBombs == 1)
       enclosingBombsClassEquivalent = 'one';
@@ -378,42 +404,77 @@
       enclosingBombsClassEquivalent = 'eight';
     
     if(adjBombs > 0) {
-      console.log('#'+a[i][j]);
-      $('#'+a[i][j]).addClass(enclosingBombsClassEquivalent);
-      document.getElementById(a[i][j]).innerHTML = adjBombs;
+      console.log('#'+(i*9 + j));
+      $('#'+(i*9 + j)).addClass(enclosingBombsClassEquivalent);
+      document.getElementById(i*9 + j).innerHTML = adjBombs;
     }
   };
-
-  $('.closeBox').click(function() {
-    console.log($(this).attr("id"));
-    $(this).removeClass('closeBox');
-    var x = parseInt($(this).attr("id"));
-    var flag = 0;
-    for(var i = 0; i < bombs.length; i++) {
-      if(x == bombs[i]) {
-        flag = 1;
-        this.innerHTML = 'B';
-        $(this).addClass('bomb');
-        opened[parseInt(x/9)][x%9] = 0;
-      }
-    }
-    $(this).addClass('zeroBox');
-    if(flag == 0) {
-      var visited = [
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
-      ];
-      var enclosingBomb = T(parseInt(x/9),x%9,visited);
-      console.log(visited);
+  $('.closeBox').mousedown(function(event) {
+    switch (event.which) {
+      case 1:// alert('Left Mouse button pressed.');
+            openTheBox(this);
+            break;
+      case 2:// alert('Middle Mouse button pressed.');
+            break;
+      case 3:// alert('Right Mouse button pressed.');
+            event.preventDefault();
+            flagTheBox(this);
+            break;
     }
   });
+  function openTheBox(leftClickedBox) {
+    console.log($(leftClickedBox).attr("id"));
+    var x = parseInt($(leftClickedBox).attr("id"));
+    var flag = 0;
+    if(a[parseInt(x/9)][x%9] == 'f')
+      flag = 1;
+    if(flag == 0) {
+      flag = 0;
+      $(leftClickedBox).removeClass('closeBox');
+      if(opened[parseInt(x/9)][x%9] == 'm') {
+        flag = 1;
+        leftClickedBox.innerHTML = "<img src='mine.gif' height=20px width=20px>";
+        $('#emoticon')[0].innerHTML = "<img src='sad.gif' height=40px width=40px></div>";
+        $(leftClickedBox).addClass('mine');
+        opened[parseInt(x/9)][x%9] = 0;
+      }
+      $(leftClickedBox).addClass('zeroBox');
+      if(flag == 0) {
+        var visited = [
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+          [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
+        ];
+        var enclosingBomb = T(parseInt(x/9),x%9,visited);
+        console.log(visited);
+      }
+    }
+  };
+  function flagTheBox(rightClickedBox){
+    console.log($(rightClickedBox).attr("id"));
+    var flag = 0;
+    var x = parseInt($(rightClickedBox).attr("id"));
+    var i = parseInt(x/9);
+    var j = x%9;
+    if(a[i][j] == 'f') {
+      if(opened[i][j] == 'm')
+        a[i][j] = 'm';
+      else
+        a[i][j] = x;
+      rightClickedBox.innerHTML = "";
+      flag = 1;
+    }
+    if(flag == 0) {
+      rightClickedBox.innerHTML = "<img src='flag.png' height=20px width=16px>";
+      a[i][j] = 'f';
+    }
+  };
 
   </script>
   
