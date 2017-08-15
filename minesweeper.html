@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+  
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+    }
+    @font-face {
+      font-family: "lilliput steps";
+      src: url("lilliput steps.ttf");
+    }
+    #borderBox {
+      display: flex;
+      margin: 10px;
+      border-top: medium solid #ffffff;
+      border-right: medium solid #7b7b7b;
+      border-bottom: medium solid #7b7b7b;
+      border-left: medium solid #ffffff;
+      background-color: black;
+      width: 502px;
+      height: 328px;
+    }
+    .playBox {
+      width: -webkit-fill-available;
+      height: -webkit-fill-available;
+      border-style: inset;
+      border: medium solid #bdbdbd;
+      border-width: 6px;
+    }
+    #timeBox {
+      display: flex;
+      width: -webkit-fill-available;
+      height: 32px;
+      border-style: inset;
+      border-top: medium solid #7b7b7b;
+      border-right: medium solid #ffffff;
+      border-bottom: medium solid #ffffff;
+      border-left: medium solid #7b7b7b;
+      border-width: 2.4px;
+      background-color: #c0c0c0;
+    }
+    .separator {
+      display: flex;
+      width: -webkit-fill-available;
+      height: 6px;
+      background-color: #c0c0c0;
+    }
+    #mineBox {
+      display: flex;
+      flex-wrap: wrap;
+      width: 486px;
+      height: 268px;
+      border-top: medium solid #7b7b7b;
+      border-right: medium solid #ffffff;
+      border-bottom: medium solid #ffffff;
+      border-left: medium solid #7b7b7b;
+      border-width: 2.4px;
+      background-color: #bdbdbd;
+    }
+    .closeBox {
+      display: flex;
+      width: 14px;
+      height: 14px;
+      border-top: medium solid #ffffff;
+      border-right: medium solid #7b7b7b;
+      border-bottom: medium solid #7b7b7b;
+      border-left: medium solid #ffffff;
+      border-width: 2px;
+      background-color: #bdbdbd;
+    }
+    .zeroBox {
+      display: flex;
+      width: 16px;
+      height: 16px;
+      border-style: solid;
+      border-color: #7b7b7b;
+      border-width: 1px;
+      background-color: #bdbdbd;
+      
+      font-family: "lilliput steps";
+      font-weight: bold;
+      font-size: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    .one {
+      color: #0000ff;
+    }
+    .two {
+      color: #007b00;
+    }
+    .three {
+      color: #ff0000;
+    }
+    .four {
+      color: #00007b;
+    }
+    .five {
+      color: #7b0000;
+    }
+    .six {
+      color: #007b7b;
+    }
+    .seven {
+      color: #000000;
+    }
+    .eight {
+      color: #7b7b7b;
+    }
+    
+  </style>
+  
+<div id="borderBox">
+  <div class="playBox">
+      
+      <div id="timeBox"></div>
+      <div class="separator"></div>
+      <div id="mineBox">
+        <div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox two">2</div><div class="zeroBox four">4</div><div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox three">3</div><div class="zeroBox eight">8</div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox three">3</div><div class="zeroBox seven">7</div><div class="zeroBox six">6</div><div class="zeroBox five">5</div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div>
+        <div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox"></div><div class="zeroBox"></div><div class="zeroBox"></div><div class="zeroBox"></div><div class="zeroBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="zeroBox one">1</div><div class="zeroBox"></div><div class="zeroBox"></div><div class="zeroBox one">1</div><div class="zeroBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div><div class="closeBox"></div>
+        
+
+      </div>
+      
+    </div>
+</div>
+  
+</body>
+</html>
