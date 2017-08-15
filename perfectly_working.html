@@ -384,13 +384,13 @@
     }
   };
 
-  var flag = 0;
   $('.closeBox').click(function() {
     console.log($(this).attr("id"));
     $(this).removeClass('closeBox');
     var x = parseInt($(this).attr("id"));
+    var flag = 0;
     for(var i = 0; i < bombs.length; i++) {
-      if($(this).attr("id") == bombs[i]) {
+      if(x == bombs[i]) {
         flag = 1;
         this.innerHTML = 'B';
         $(this).addClass('bomb');
@@ -412,36 +412,8 @@
       ];
       var enclosingBomb = T(parseInt(x/9),x%9,visited);
       console.log(visited);
-
-    //   this.innerHTML = enclosingBomb.toString();
-    //   if(enclosingBomb == 1)
-    //     enclosingBombClassEquivalent = 'one';
-    //   if(enclosingBomb == 2)
-    //     enclosingBombClassEquivalent = 'two';
-    //   if(enclosingBomb == 3)
-    //     enclosingBombClassEquivalent = 'three';
-    //   if(enclosingBomb == 4)
-    //     enclosingBombClassEquivalent = 'four';
-    //   if(enclosingBomb == 5)
-    //     enclosingBombClassEquivalent = 'five';
-    //   if(enclosingBomb == 6)
-    //     enclosingBombClassEquivalent = 'six';
-    //   if(enclosingBomb == 7)
-    //     enclosingBombClassEquivalent = 'seven';
-    //   if(enclosingBomb == 8)
-    //     enclosingBombClassEquivalent = 'eight';
-      
-    //   if(enclosingBomb > 0) {
-    //     $(this).addClass(enclosingBombClassEquivalent);
-    //   }
     }
   });
-
-    
-
-
-
-
 
   </script>
   
