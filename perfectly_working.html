@@ -255,7 +255,7 @@
   }
   function setRandomMinePositions() {
     var newRandomMinePosition = 0, x = 0, y = 0;
-    for(var i = 0; i < 50; i++) {
+    for(var i = 0; i < 30; i++) {
       newRandomMinePosition = getRandomMinePositions(0,80);
       x = parseInt(newRandomMinePosition/9);
       y = newRandomMinePosition%9;
@@ -268,54 +268,51 @@
   }
   setRandomMinePositions();
 
-  function bomFinder(i,j) {
+  function mineFinder(i,j) {
     if(opened[i][j] == 'm')
       return 1;
     return 0;
   };
 
   function T(i,j) {
+    opened[i][j] = 0;
     var t = 0, r = 0, b = 0, l = 0, tr = 0, br = 0, bl = 0, tl = 0, flagBomb = 0;
     
     if(i-1 > -1 && i-1 < 9 && j > -1 && j < 9) {
-      if(bomFinder(i-1,j) == 1)
+      if(mineFinder(i-1,j) == 1)
         t = 1;
       else {
         if(opened[i-1][j] == -1) {
-          opened[i-1][j] = 0;
           T(i-1,j);
         }
       }
     }
     console.log('T', t);
     if(i > -1 && i < 9 && j+1 > -1 && j+1 < 9) {
-      if(bomFinder(i,j+1) == 1)
+      if(mineFinder(i,j+1) == 1)
         r = 1;
       else {
         if(opened[i][j+1] == -1) {
-          opened[i][j+1] = 0;
           T(i,j+1);
         }
       }
     }
     console.log('R', r);
     if(i+1 > -1 && i+1 < 9 && j > -1 && j < 9) {
-      if(bomFinder(i+1,j) == 1)
+      if(mineFinder(i+1,j) == 1)
         b = 1;
       else {
         if(opened[i+1][j] == -1) { 
-          opened[i+1][j] = 0;
           T(i+1,j);
         }
       }
     }
     console.log('B', b);
     if(i > -1 && i < 9 && j-1 > -1 && j-1 < 9) {
-      if(bomFinder(i,j-1) == 1)
+      if(mineFinder(i,j-1) == 1)
         l = 1;
       else {
         if(opened[i][j-1] == -1) { 
-          opened[i][j-1] = 0;
           T(i,j-1);
         }
       }
@@ -323,13 +320,12 @@
     console.log('L', l);
 
     if(i-1 > -1 && i-1 < 9 && j+1 > -1 && j+1 < 9) {
-      if(bomFinder(i-1,j+1) == 1) {
+      if(mineFinder(i-1,j+1) == 1) {
         tr = 1;
       }
       else {
         if(opened[i-1][j+1] == -1) {
           if(t != 1 && r != 1) {
-            opened[i-1][j+1] = 0;
             T(i-1,j+1);
           }
         }
@@ -337,13 +333,12 @@
     }
     console.log('TR', tr);
     if(i+1 > -1 && i+1 < 9 && j+1 > -1 && j+1 < 9) {
-      if(bomFinder(i+1,j+1) == 1) {
+      if(mineFinder(i+1,j+1) == 1) {
         br = 1;
       }
       else {
         if(opened[i+1][j+1] == -1) {
           if(b != 1 && r != 1) {
-            opened[i+1][j+1] = 0;
             T(i+1,j+1);
           }
         }
@@ -351,13 +346,12 @@
     }
     console.log('BR', br);
     if(i+1 > -1 && i+1 < 9 && j-1 > -1 && j-1 < 9) {
-      if(bomFinder(i+1,j-1) == 1) {
+      if(mineFinder(i+1,j-1) == 1) {
         bl = 1;
       }
       else {
         if(opened[i+1][j-1] == -1) {
           if(b != 1 && l != 1) {
-            opened[i+1][j-1] = 0;
             T(i+1,j-1);
           }
         }
@@ -365,13 +359,12 @@
     }
     console.log('BL', bl);
     if(i-1 > -1 && i-1 < 9 && j-1 > -1 && j-1 < 9) {  
-      if(bomFinder(i-1,j-1) == 1) {
+      if(mineFinder(i-1,j-1) == 1) {
         tl = 1;
       }
       else {
         if(opened[i-1][j-1] == -1) {  
           if(t != 1 && l != 1) {
-            opened[i-1][j-1] = 0;
             T(i-1,j-1);
           }
         }
@@ -423,6 +416,8 @@
     }
   });
   function openTheBox(leftClickedBox) {
+    if( $(leftClickedBox).hasClass('zeroBox') == true )
+      return;
     console.log($(leftClickedBox).attr("id"));
     var x = parseInt($(leftClickedBox).attr("id"));
     var flag = 0;
@@ -436,7 +431,6 @@
         leftClickedBox.innerHTML = "<img src='mine.gif' height=20px width=20px>";
         $('#emoticon')[0].innerHTML = "<img src='sad.gif' height=40px width=40px></div>";
         $(leftClickedBox).addClass('mine');
-        opened[parseInt(x/9)][x%9] = 0;
       }
       $(leftClickedBox).addClass('zeroBox');
       if(flag == 0) {
@@ -457,6 +451,8 @@
     }
   };
   function flagTheBox(rightClickedBox){
+    if( $(rightClickedBox).hasClass('zeroBox') == true )
+      return;
     console.log($(rightClickedBox).attr("id"));
     var flag = 0;
     var x = parseInt($(rightClickedBox).attr("id"));
