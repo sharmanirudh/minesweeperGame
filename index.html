@@ -367,10 +367,9 @@
           y = newRandomMinePosition%9;
           if(opened[x][y] == 'm') {
             i--;
-          }else {
+          } else {
             opened[x][y] = 'm';
           }
-
         }
       };
       setRandomMinePositions(totalMines);
@@ -577,12 +576,22 @@
               if(!smileyChange) {
                 smileyChange = setInterval(function() {
                   clearInterval(smileyChange);
-                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                  if(totalFlaggedBoxes + totalOpenedBoxes == 81) {
+                    clearInterval(number);
+                    $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
+                  }
+                  else
+                    $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
                 },200);
               }else {
                 smileyChange = setInterval(function() {
                   clearInterval(smileyChange);
-                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                  if(totalFlaggedBoxes + totalOpenedBoxes == 81) {
+                    clearInterval(number);
+                    $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
+                  }
+                  else
+                    $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
                 },200);
               }
             }
@@ -605,12 +614,14 @@
             a[i][j] = x;
           rightClickedBox.innerHTML = "";
           totalMines = totalMines + 1;
-          totalFlaggedBoxes = totalFlaggedBoxes - 1;
+          if(opened[i][j] == 'm')
+            totalFlaggedBoxes = totalFlaggedBoxes - 1;
           flag = 1;
         }
         if(flag == 0) {
           totalMines = totalMines - 1;
-          totalFlaggedBoxes = totalFlaggedBoxes + 1;
+          if(opened[i][j] == 'm')
+            totalFlaggedBoxes = totalFlaggedBoxes + 1;
           rightClickedBox.innerHTML = "<img src='flag.png' height=20px width=16px>";
           a[i][j] = 'f';
         }
