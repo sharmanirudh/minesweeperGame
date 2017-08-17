@@ -302,6 +302,7 @@
       var gameOver = false;
       var newGameFirstClick = true;
       var timeElapsed = 0;
+      var smileyChange;
 
       function timeKeeper() {
         console.log(timeElapsed);
@@ -336,12 +337,12 @@
       };
       function mineKeeper(mines) {
         var minesSting = mines.toString(), ones, tenths, hundreds;
-        if(mines > 99 ) {
+        if(mines > 99) {
           ones = minesSting[2];
           tenths = minesSting[1];
           hundreds = minesSting[0];
         }
-        if(mines < 10 ) {
+        if(mines < 10) {
           ones = minesSting[0];
           tenths = '-';
           hundreds = '-';
@@ -369,6 +370,7 @@
           }else {
             opened[x][y] = 'm';
           }
+
         }
       };
       setRandomMinePositions(totalMines);
@@ -550,25 +552,41 @@
             clearInterval(number);
             gameOver = true;
             leftClickedBox.innerHTML = "<img src='mine.gif' height=20px width=20px>";
+            $(leftClickedBox).css('background-color','red');
+            var mineBoxes;
+            for(var i = 0; i < 9; i++) {
+              for(var j = 0; j < 9; j++) {
+                if(opened[i][j] == 'm') {
+                  mineBoxes = $('#'+(i*9 + j));
+                  mineBoxes.removeClass('closeBox');
+                  mineBoxes.addClass('zeroBox');
+                  mineBoxes[0].innerHTML = "<img src='mine.gif' height=20px width=20px>";
+                }
+                else if(a[i][j] == 'f')
+                  $('#'+(i*9 + j))[0].innerHTML = "<img src='wrong-flag.png' height=20px width=20px>";
+              }
+            }
             $('#emoticon')[0].innerHTML = "<img src='sad.gif' height=40px width=40px></div>";
             $(leftClickedBox).addClass('mine');
             flag = 1;
           }
           $(leftClickedBox).addClass('zeroBox');
           if(flag == 0) {
-            var visited = [
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-              [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
-            ];
-            var enclosingBomb = T(parseInt(x/9),x%9,visited);
-            console.log(visited);
+            if(gameOver == false) {
+              $('#emoticon')[0].innerHTML = "<img src='oh.gif' height=40px width=40px></div>";
+              if(!smileyChange) {
+                smileyChange = setInterval(function() {
+                  clearInterval(smileyChange);
+                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                },200);
+              }else {
+                smileyChange = setInterval(function() {
+                  clearInterval(smileyChange);
+                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                },200);
+              }
+            }
+            var enclosingBomb = T(parseInt(x/9),x%9);
           }
         }
       };
@@ -616,6 +634,17 @@
         mineBoxInnerHTML = mineBoxInnerHTML + "<div class='closeBox' id='"+i+"'></div>";
       }
       mineBox.innerHTML = mineBoxInnerHTML;
+      opened = [
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
+      ];
       MINESWEEPER(setTotalNoOfMines);
     });
     MINESWEEPER(setTotalNoOfMines);
