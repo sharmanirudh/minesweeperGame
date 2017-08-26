@@ -29,7 +29,7 @@
       width: 268px;
       height: 325px;
     }
-    .playBox {
+    #playBox {
       display: flex;
       flex-direction: column;
       width: -webkit-fill-available;
@@ -165,7 +165,7 @@
   </style>
   
 <div id="borderBox">
-  <div class="playBox">
+  <div id="playBox">
       
       <div id="timeBox">
         <div id="minesLeft">
@@ -182,120 +182,65 @@
       </div>
       <div class="separator"></div>
       <div id="mineBox" oncontextmenu="return false;">
-        <div class='closeBox' id='0'></div>
-        <div class='closeBox' id='1'></div>
-        <div class='closeBox' id='2'></div>
-        <div class='closeBox' id='3'></div>
-        <div class='closeBox' id='4'></div>
-        <div class='closeBox' id='5'></div>
-        <div class='closeBox' id='6'></div>
-        <div class='closeBox' id='7'></div>
-        <div class='closeBox' id='8'></div>
-        <div class='closeBox' id='9'></div>
-        <div class='closeBox' id='10'></div>
-        <div class='closeBox' id='11'></div>
-        <div class='closeBox' id='12'></div>
-        <div class='closeBox' id='13'></div>
-        <div class='closeBox' id='14'></div>
-        <div class='closeBox' id='15'></div>
-        <div class='closeBox' id='16'></div>
-        <div class='closeBox' id='17'></div>
-        <div class='closeBox' id='18'></div>
-        <div class='closeBox' id='19'></div>
-        <div class='closeBox' id='20'></div>
-        <div class='closeBox' id='21'></div>
-        <div class='closeBox' id='22'></div>
-        <div class='closeBox' id='23'></div>
-        <div class='closeBox' id='24'></div>
-        <div class='closeBox' id='25'></div>
-        <div class='closeBox' id='26'></div>
-        <div class='closeBox' id='27'></div>
-        <div class='closeBox' id='28'></div>
-        <div class='closeBox' id='29'></div>
-        <div class='closeBox' id='30'></div>
-        <div class='closeBox' id='31'></div>
-        <div class='closeBox' id='32'></div>
-        <div class='closeBox' id='33'></div>
-        <div class='closeBox' id='34'></div>
-        <div class='closeBox' id='35'></div>
-        <div class='closeBox' id='36'></div>
-        <div class='closeBox' id='37'></div>
-        <div class='closeBox' id='38'></div>
-        <div class='closeBox' id='39'></div>
-        <div class='closeBox' id='40'></div>
-        <div class='closeBox' id='41'></div>
-        <div class='closeBox' id='42'></div>
-        <div class='closeBox' id='43'></div>
-        <div class='closeBox' id='44'></div>
-        <div class='closeBox' id='45'></div>
-        <div class='closeBox' id='46'></div>
-        <div class='closeBox' id='47'></div>
-        <div class='closeBox' id='48'></div>
-        <div class='closeBox' id='49'></div>
-        <div class='closeBox' id='50'></div>
-        <div class='closeBox' id='51'></div>
-        <div class='closeBox' id='52'></div>
-        <div class='closeBox' id='53'></div>
-        <div class='closeBox' id='54'></div>
-        <div class='closeBox' id='55'></div>
-        <div class='closeBox' id='56'></div>
-        <div class='closeBox' id='57'></div>
-        <div class='closeBox' id='58'></div>
-        <div class='closeBox' id='59'></div>
-        <div class='closeBox' id='60'></div>
-        <div class='closeBox' id='61'></div>
-        <div class='closeBox' id='62'></div>
-        <div class='closeBox' id='63'></div>
-        <div class='closeBox' id='64'></div>
-        <div class='closeBox' id='65'></div>
-        <div class='closeBox' id='66'></div>
-        <div class='closeBox' id='67'></div>
-        <div class='closeBox' id='68'></div>
-        <div class='closeBox' id='69'></div>
-        <div class='closeBox' id='70'></div>
-        <div class='closeBox' id='71'></div>
-        <div class='closeBox' id='72'></div>
-        <div class='closeBox' id='73'></div>
-        <div class='closeBox' id='74'></div>
-        <div class='closeBox' id='75'></div>
-        <div class='closeBox' id='76'></div>
-        <div class='closeBox' id='77'></div>
-        <div class='closeBox' id='78'></div>
-        <div class='closeBox' id='79'></div>
-        <div class='closeBox' id='80'></div>
-
+        
       </div>
       
     </div>
 </div>
-  
+
 </body>
   <script type="text/javascript">
     var number;
-    var setTotalNoOfMines = 40;
-    var opened = [
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
-      ];
-    function MINESWEEPER(totalMines) {
-      var a = [
-        [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
-        [ 9, 10, 11, 12, 13, 14, 15, 16, 17 ],
-        [ 18, 19, 20, 21, 22, 23, 24, 25, 26 ],
-        [ 27, 28, 29, 30, 31, 32, 33, 34, 35 ],
-        [ 36, 37, 38, 39, 40, 41, 42, 43, 44 ],
-        [ 45, 46, 47, 48, 49, 50, 51, 52, 53 ],
-        [ 54, 55, 56, 57, 58, 59, 60, 61, 62 ],
-        [ 63, 64, 65, 66, 67, 68, 69, 70, 71 ],
-        [ 72, 73, 74, 75, 76, 77, 78, 79, 80 ]
-      ];
+    var setTotalNoOfMines = 90;
+    var boxDimensionX = 10;
+    var boxDimensionY = 20;
+    var totalBoxes = boxDimensionX * boxDimensionY - 1;
+    var opened = [];
+    var temp = [];
+    for(var i = 0; i < boxDimensionX; i++) {
+      temp = [];
+      for(var j = 0; j < boxDimensionY; j++)
+          temp[j] = -1;
+      opened[i] = temp;
+    }
+
+    var mineBoxInnerHTML = "", mineBox = $('#mineBox')[0];
+    mineBox.innerHTML = "";
+    for(var i = 0; i < totalBoxes + 1; i++) {
+      mineBoxInnerHTML = mineBoxInnerHTML + "<div class='closeBox' id='" + i + "'></div>";
+    }
+    mineBox.innerHTML = mineBoxInnerHTML;
+    opened = [];
+    var temp = [];
+    for(var i = 0; i < boxDimensionX; i++) {
+      temp = [];
+      for(var j = 0; j < boxDimensionY; j++)
+          temp[j] = -1;
+      opened[i] = temp;
+    }
+
+    var closeBox = document.getElementsByClassName('closeBox')[0];
+    $('#playBox').css('height', closeBox.offsetHeight * boxDimensionX + 2*2 + $('#timeBox')[0].offsetHeight + $('.separator')[0].offsetHeight + 'px');
+    $('#playBox').css('width', closeBox.offsetWidth * boxDimensionY + 12 + 'px');
+    $('#mineBox').css('height', closeBox.offsetHeight * boxDimensionX + 'px');
+    $('#mineBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
+    $('#timeBox').css('height', $('#timeBox').clientHeight + 'px');
+    $('#timeBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
+    $('#borderBox').css('height', $('#playBox')[0].offsetHeight + 'px');
+    $('#borderBox').css('width', $('#playBox')[0].offsetWidth + 'px');
+
+
+
+
+    function MINESWEEPER(totalMines, boxDimensionX, boxDimensionY, totalBoxes) {
+      var a = [];
+      var temp = [];
+      for(var i = 0; i < boxDimensionX; i++) {
+        temp = [];
+        for(var j = i*boxDimensionY, k = 0; j < i*boxDimensionY + boxDimensionY; j++, k++)
+            temp[k] = j;
+        a[i] = temp;
+      }
       
       var totalOpenedBoxes = 0;
       var totalFlaggedBoxes = 0;
@@ -305,7 +250,6 @@
       var smileyChange;
 
       function timeKeeper() {
-        console.log(timeElapsed);
         var timeSting = timeElapsed.toString(), ones, tenths, hundreds;
         if(timeElapsed > 99 ) {
           ones = timeSting[2];
@@ -342,7 +286,7 @@
           tenths = minesSting[1];
           hundreds = minesSting[0];
         }
-        if(mines < 10) {
+        else if(mines < 10) {
           ones = minesSting[0];
           tenths = '-';
           hundreds = '-';
@@ -359,18 +303,47 @@
         $('#mineHundrends')[0].innerHTML = "<img src='"+hundreds+".gif' height=26px width=14px></div>";
       };
       function setRandomMinePositions(mines) {
+        if(totalMines > totalBoxes + 1) {
+          alert('Number of mines cannot be greater than the dimension of the game!');
+          return;
+        }
         var newRandomMinePosition = 0, x = 0, y = 0;
         mineKeeper(mines);
         for(var i = 0; i < mines; i++) {
-          newRandomMinePosition = getRandomMinePositions(0,80);
-          x = parseInt(newRandomMinePosition/9);
-          y = newRandomMinePosition%9;
+          newRandomMinePosition = getRandomMinePositions(0,totalBoxes - 1);
+          x = parseInt(newRandomMinePosition/boxDimensionY);
+          y = newRandomMinePosition%boxDimensionY;
           if(opened[x][y] == 'm') {
             i--;
-          }else {
+          } else {
             opened[x][y] = 'm';
           }
-
+          // if(opened[x][y] == 'm') {
+          //   if(y == boxDimensionY - 1 && x > 0 && x < boxDimensionX - 1) {
+          //     if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
+          //       i--;
+          //   }
+          //   if(y == 0 && x > 0 && x < boxDimensionX - 1) {
+          //     if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
+          //       i--;
+          //   }
+          //   if(y == 0 && x == 0) {
+          //     if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x+1][y] == 'm')
+          //       i--;
+          //   }
+          //   if(y == boxDimensionY - 1 && x == 0) {
+          //     if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x+1][y] == 'm')
+          //       i--;
+          //   }
+          //   if(y == boxDimensionY - 1 && x == boxDimensionX - 1) {
+          //     if(opened[x][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm')
+          //       i--;
+          //   }
+          //   if(y == 0 && x == boxDimensionX - 1) {
+          //     if(opened[x][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm')
+          //       i--;
+          //   }
+          // }
         }
       };
       setRandomMinePositions(totalMines);
@@ -386,7 +359,7 @@
         totalOpenedBoxes = totalOpenedBoxes + 1;
         var t = 0, r = 0, b = 0, l = 0, tr = 0, br = 0, bl = 0, tl = 0, flagBomb = 0;
         
-        if(i-1 > -1 && i-1 < 9 && j > -1 && j < 9) {
+        if(i-1 > -1 && i-1 < boxDimensionX && j > -1 && j < boxDimensionY) {
           if(mineFinder(i-1,j) == 1)
             t = 1;
           else {
@@ -396,7 +369,7 @@
           }
         }
         console.log('T', t);
-        if(i > -1 && i < 9 && j+1 > -1 && j+1 < 9) {
+        if(i > -1 && i < boxDimensionX && j+1 > -1 && j+1 < boxDimensionY) {
           if(mineFinder(i,j+1) == 1)
             r = 1;
           else {
@@ -406,7 +379,7 @@
           }
         }
         console.log('R', r);
-        if(i+1 > -1 && i+1 < 9 && j > -1 && j < 9) {
+        if(i+1 > -1 && i+1 < boxDimensionX && j > -1 && j < boxDimensionY) {
           if(mineFinder(i+1,j) == 1)
             b = 1;
           else {
@@ -416,7 +389,7 @@
           }
         }
         console.log('B', b);
-        if(i > -1 && i < 9 && j-1 > -1 && j-1 < 9) {
+        if(i > -1 && i < boxDimensionX && j-1 > -1 && j-1 < boxDimensionY) {
           if(mineFinder(i,j-1) == 1)
             l = 1;
           else {
@@ -427,7 +400,7 @@
         }
         console.log('L', l);
 
-        if(i-1 > -1 && i-1 < 9 && j+1 > -1 && j+1 < 9) {
+        if(i-1 > -1 && i-1 < boxDimensionX && j+1 > -1 && j+1 < boxDimensionY) {
           if(mineFinder(i-1,j+1) == 1) {
             tr = 1;
           }
@@ -440,7 +413,7 @@
           }
         }
         console.log('TR', tr);
-        if(i+1 > -1 && i+1 < 9 && j+1 > -1 && j+1 < 9) {
+        if(i+1 > -1 && i+1 < boxDimensionX && j+1 > -1 && j+1 < boxDimensionY) {
           if(mineFinder(i+1,j+1) == 1) {
             br = 1;
           }
@@ -453,7 +426,7 @@
           }
         }
         console.log('BR', br);
-        if(i+1 > -1 && i+1 < 9 && j-1 > -1 && j-1 < 9) {
+        if(i+1 > -1 && i+1 < boxDimensionX && j-1 > -1 && j-1 < boxDimensionY) {
           if(mineFinder(i+1,j-1) == 1) {
             bl = 1;
           }
@@ -466,7 +439,7 @@
           }
         }
         console.log('BL', bl);
-        if(i-1 > -1 && i-1 < 9 && j-1 > -1 && j-1 < 9) {  
+        if(i-1 > -1 && i-1 < boxDimensionX && j-1 > -1 && j-1 < boxDimensionY) {  
           if(mineFinder(i-1,j-1) == 1) {
             tl = 1;
           }
@@ -485,7 +458,7 @@
 
 
 
-        $('#'+(i*9 + j)).addClass('zeroBox');
+        $('#'+(i*boxDimensionY + j)).addClass('zeroBox');
         var enclosingBombsClassEquivalent = '';
         if(adjBombs == 1)
           enclosingBombsClassEquivalent = 'one';
@@ -505,11 +478,11 @@
           enclosingBombsClassEquivalent = 'eight';
         
         if(adjBombs > 0) {
-          console.log('#'+(i*9 + j));
-          $('#'+(i*9 + j)).addClass(enclosingBombsClassEquivalent);
-          document.getElementById(i*9 + j).innerHTML = adjBombs;
+          console.log('#'+(i*boxDimensionY + j));
+          $('#'+(i*boxDimensionY + j)).addClass(enclosingBombsClassEquivalent);
+          document.getElementById(i*boxDimensionY + j).innerHTML = adjBombs;
         }
-        if(totalOpenedBoxes + totalFlaggedBoxes == 81) {
+        if(totalOpenedBoxes + totalFlaggedBoxes == totalBoxes + 1) {
           gameOver == true;
           $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
         }
@@ -543,27 +516,27 @@
         console.log($(leftClickedBox).attr("id"));
         var x = parseInt($(leftClickedBox).attr("id"));
         var flag = 0;
-        if(a[parseInt(x/9)][x%9] == 'f')
+        if(a[parseInt(x/boxDimensionY)][x%boxDimensionY] == 'f')
           flag = 1;
         if(flag == 0) {
           flag = 0;
           $(leftClickedBox).removeClass('closeBox');
-          if(opened[parseInt(x/9)][x%9] == 'm') {
+          if(opened[parseInt(x/boxDimensionY)][x%boxDimensionY] == 'm') {
             clearInterval(number);
             gameOver = true;
             leftClickedBox.innerHTML = "<img src='mine.gif' height=20px width=20px>";
             $(leftClickedBox).css('background-color','red');
             var mineBoxes;
-            for(var i = 0; i < 9; i++) {
-              for(var j = 0; j < 9; j++) {
+            for(var i = 0; i < boxDimensionX; i++) {
+              for(var j = 0; j < boxDimensionY; j++) {
                 if(opened[i][j] == 'm') {
-                  mineBoxes = $('#'+(i*9 + j));
+                  mineBoxes = $('#'+(i*boxDimensionY + j));
                   mineBoxes.removeClass('closeBox');
                   mineBoxes.addClass('zeroBox');
                   mineBoxes[0].innerHTML = "<img src='mine.gif' height=20px width=20px>";
                 }
                 else if(a[i][j] == 'f')
-                  $('#'+(i*9 + j))[0].innerHTML = "<img src='wrong-flag.png' height=20px width=20px>";
+                  $('#'+(i*boxDimensionY + j))[0].innerHTML = "<img src='wrong-flag.png' height=20px width=20px>";
               }
             }
             $('#emoticon')[0].innerHTML = "<img src='sad.gif' height=40px width=40px></div>";
@@ -577,16 +550,26 @@
               if(!smileyChange) {
                 smileyChange = setInterval(function() {
                   clearInterval(smileyChange);
-                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                  if(totalFlaggedBoxes + totalOpenedBoxes == totalBoxes + 1) {
+                    clearInterval(number);
+                    $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
+                  }
+                  else
+                    $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
                 },200);
               }else {
                 smileyChange = setInterval(function() {
                   clearInterval(smileyChange);
-                  $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+                  if(totalFlaggedBoxes + totalOpenedBoxes == totalBoxes + 1) {
+                    clearInterval(number);
+                    $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
+                  }
+                  else
+                    $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
                 },200);
               }
             }
-            var enclosingBomb = T(parseInt(x/9),x%9);
+            var enclosingBomb = T(parseInt(x/boxDimensionY),x%boxDimensionY);
           }
         }
       };
@@ -596,8 +579,8 @@
         console.log($(rightClickedBox).attr("id"));
         var flag = 0;
         var x = parseInt($(rightClickedBox).attr("id"));
-        var i = parseInt(x/9);
-        var j = x%9;
+        var i = parseInt(x/boxDimensionY);
+        var j = x%boxDimensionY;
         if(a[i][j] == 'f') {
           if(opened[i][j] == 'm')
             a[i][j] = 'm';
@@ -605,17 +588,19 @@
             a[i][j] = x;
           rightClickedBox.innerHTML = "";
           totalMines = totalMines + 1;
-          totalFlaggedBoxes = totalFlaggedBoxes - 1;
+          if(opened[i][j] == 'm')
+            totalFlaggedBoxes = totalFlaggedBoxes - 1;
           flag = 1;
         }
         if(flag == 0) {
           totalMines = totalMines - 1;
-          totalFlaggedBoxes = totalFlaggedBoxes + 1;
+          if(opened[i][j] == 'm')
+            totalFlaggedBoxes = totalFlaggedBoxes + 1;
           rightClickedBox.innerHTML = "<img src='flag.png' height=20px width=16px>";
           a[i][j] = 'f';
         }
         mineKeeper(totalMines);
-        if(totalOpenedBoxes + totalFlaggedBoxes == 81) {
+        if(totalOpenedBoxes + totalFlaggedBoxes == totalBoxes + 1) {
           clearInterval(number);
           gameOver == true;
           $('#emoticon')[0].innerHTML = "<img src='cool.gif' height=40px width=40px></div>";
@@ -630,39 +615,36 @@
       var mineBoxInnerHTML = "", mineBox = $('#mineBox')[0];
       mineBox.innerHTML = "";
       $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
-      for(var i = 0; i < 81; i++) {
-        mineBoxInnerHTML = mineBoxInnerHTML + "<div class='closeBox' id='"+i+"'></div>";
+      for(var i = 0; i < totalBoxes + 1; i++) {
+        mineBoxInnerHTML = mineBoxInnerHTML + "<div class='closeBox' id='" + i + "'></div>";
       }
       mineBox.innerHTML = mineBoxInnerHTML;
-      opened = [
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-        [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
-      ];
-      MINESWEEPER(setTotalNoOfMines);
+      opened = [];
+      var temp = [];
+      for(var i = 0; i < boxDimensionX; i++) {
+        temp = [];
+        for(var j = 0; j < boxDimensionY; j++)
+            temp[j] = -1;
+        opened[i] = temp;
+      }
+      MINESWEEPER(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
     });
-    MINESWEEPER(setTotalNoOfMines);
+    MINESWEEPER(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
   </script>
 </html>
 
 <!-- k = 0
-(0..8).each do |i|
-     (0..8).each do |j|
+(0..boxDimensionX - 1).each do |i|
+     (0..boxDimensionY - 1).each do |j|
          puts "<div class='closeBox' id='#{k}'></div>"
          k = k + 1
      end
 end -->
 
 <!-- k = 0
-(0..8).each do |i|
+(0..boxDimensionX - 1).each do |i|
      print "[ "
-     (0..8).each do |j|
+     (0..boxDimensionY - 1).each do |j|
          print "#{k}, "
          k = k + 1
      end
