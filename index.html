@@ -163,7 +163,10 @@
     }
     
   </style>
-  
+No. of rows: <input id="noOfRows" type="number" placeholder="Rows">
+No. of columns: <input id="noOfColumns" type="number" placeholder="Columns">
+No. of mines: <input id="noOfMines" type="number" placeholder="Mines">
+<button id="changeDimensions">Submit</button>
 <div id="borderBox">
   <div id="playBox">
       
@@ -218,16 +221,18 @@
           temp[j] = -1;
       opened[i] = temp;
     }
-
-    var closeBox = document.getElementsByClassName('closeBox')[0];
-    $('#playBox').css('height', closeBox.offsetHeight * boxDimensionX + 2*2 + $('#timeBox')[0].offsetHeight + $('.separator')[0].offsetHeight + 'px');
-    $('#playBox').css('width', closeBox.offsetWidth * boxDimensionY + 12 + 'px');
-    $('#mineBox').css('height', closeBox.offsetHeight * boxDimensionX + 'px');
-    $('#mineBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
-    $('#timeBox').css('height', $('#timeBox').clientHeight + 'px');
-    $('#timeBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
-    $('#borderBox').css('height', $('#playBox')[0].offsetHeight + 'px');
-    $('#borderBox').css('width', $('#playBox')[0].offsetWidth + 'px');
+    resizeBox();
+    function resizeBox() {
+      var closeBox = document.getElementsByClassName('closeBox')[0];
+      $('#playBox').css('height', closeBox.offsetHeight * boxDimensionX + 2*2 + $('#timeBox')[0].offsetHeight + $('.separator')[0].offsetHeight + 'px');
+      $('#playBox').css('width', closeBox.offsetWidth * boxDimensionY + 5 + 'px');
+      $('#mineBox').css('height', closeBox.offsetHeight * boxDimensionX + 'px');
+      $('#mineBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
+      $('#timeBox').css('height', $('#timeBox').clientHeight + 'px');
+      $('#timeBox').css('width', closeBox.offsetWidth * boxDimensionY + 'px');
+      $('#borderBox').css('height', $('#playBox')[0].offsetHeight + 'px');
+      $('#borderBox').css('width', $('#playBox')[0].offsetWidth + 'px');
+    }
 
 
 
@@ -612,7 +617,8 @@
       $('#timeOnes')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
       $('#timeTenths')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
       $('#timeHundrends')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
-      var mineBoxInnerHTML = "", mineBox = $('#mineBox')[0];
+      var mineBoxInnerHTML = "";
+      mineBox = $('#mineBox')[0];
       mineBox.innerHTML = "";
       $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
       for(var i = 0; i < totalBoxes + 1; i++) {
@@ -630,6 +636,35 @@
       MINESWEEPER(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
     });
     MINESWEEPER(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
+    $('#changeDimensions').click(function() {
+      clearInterval(number);
+      boxDimensionX = parseInt($('#noOfRows')[0].value);
+      boxDimensionY = parseInt($('#noOfColumns')[0].value);
+      setTotalNoOfMines = parseInt($('#noOfMines')[0].value);
+      totalBoxes = boxDimensionX*boxDimensionY - 1;
+      $('#timeOnes')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
+      $('#timeTenths')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
+      $('#timeHundrends')[0].innerHTML = "<img src='0.gif' height=26px width=14px></div>";
+      var mineBoxInnerHTML = "";
+      mineBox = $('#mineBox')[0];
+      mineBox.innerHTML = "";
+      $('#emoticon')[0].innerHTML = "<img src='smiley.gif' height=40px width=40px></div>";
+      for(var i = 0; i < totalBoxes + 1; i++) {
+        mineBoxInnerHTML = mineBoxInnerHTML + "<div class='closeBox' id='" + i + "'></div>";
+      }
+      mineBox.innerHTML = mineBoxInnerHTML;
+      opened = [];
+      var temp = [];
+      for(var i = 0; i < boxDimensionX; i++) {
+        temp = [];
+        for(var j = 0; j < boxDimensionY; j++)
+            temp[j] = -1;
+        opened[i] = temp;
+      }
+      resizeBox();
+      MINESWEEPER(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
+      console.log(setTotalNoOfMines, boxDimensionX, boxDimensionY, totalBoxes);
+    });
   </script>
 </html>
 
