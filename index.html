@@ -313,7 +313,6 @@ No. of mines: <input id="noOfMines" type="number" placeholder="Mines">
           return;
         }
         var newRandomMinePosition = 0, x = 0, y = 0;
-        mineKeeper(mines);
         for(var i = 0; i < mines; i++) {
           newRandomMinePosition = getRandomMinePositions(0,totalBoxes);
           x = parseInt(newRandomMinePosition/boxDimensionY);
@@ -323,35 +322,69 @@ No. of mines: <input id="noOfMines" type="number" placeholder="Mines">
           } else {
             opened[x][y] = 'm';
           }
-          // if(opened[x][y] == 'm') {
-          //   if(y == boxDimensionY - 1 && x > 0 && x < boxDimensionX - 1) {
-          //     if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
-          //       i--;
-          //   }
-          //   if(y == 0 && x > 0 && x < boxDimensionX - 1) {
-          //     if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
-          //       i--;
-          //   }
-          //   if(y == 0 && x == 0) {
-          //     if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x+1][y] == 'm')
-          //       i--;
-          //   }
-          //   if(y == boxDimensionY - 1 && x == 0) {
-          //     if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x+1][y] == 'm')
-          //       i--;
-          //   }
-          //   if(y == boxDimensionY - 1 && x == boxDimensionX - 1) {
-          //     if(opened[x][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm')
-          //       i--;
-          //   }
-          //   if(y == 0 && x == boxDimensionX - 1) {
-          //     if(opened[x][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm')
-          //       i--;
-          //   }
-          // }
         }
       };
       setRandomMinePositions(totalMines);
+      mineKeeper(totalMines);
+      function setRandomMinePositionsEvaluator() {
+        var x, y, k = 0, flag, howManyTimesCorrectedWrongMinePosition = 0;
+        while(k < totalBoxes) {
+          for(x = 0; x < boxDimensionX; x++) {
+            for(y = 0; y < boxDimensionY; y++, k++) {
+              if(opened[x][y] == 'm') {
+                flag = 0;
+                if(y == boxDimensionY - 1 && x > 0 && x < boxDimensionX - 1) {
+                  if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y == 0 && x > 0 && x < boxDimensionX - 1) {
+                  if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm' && opened[x+1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y == 0 && x == 0) {
+                  if(opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x+1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y == boxDimensionY - 1 && x == 0) {
+                  if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x+1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y == boxDimensionY - 1 && x == boxDimensionX - 1) {
+                  if(opened[x][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y == 0 && x == boxDimensionX - 1) {
+                  if(opened[x][y+1] == 'm' && opened[x-1][y+1] == 'm' && opened[x-1][y] == 'm')
+                    flag = 1;
+                }
+                else if(y > 0 && y < boxDimensionY - 1 && x == 0) {
+                  if(opened[x][y-1] == 'm' && opened[x+1][y-1] == 'm' && opened[x+1][y] == 'm' && opened[x+1][y+1] == 'm' && opened[x][y+1] == 'm')
+                    flag = 1;
+                }
+                else if(y > 0 && y < boxDimensionY - 1 && x == boxDimensionX - 1) {
+                  if(opened[x][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm' && opened[x-1][y+1] == 'm' && opened[x][y+1] == 'm')
+                    flag = 1;
+                }
+                else if(y > 0 && y < boxDimensionY - 1 && x > 0 && x < boxDimensionX - 1) {
+                  if(opened[x][y-1] == 'm' && opened[x-1][y-1] == 'm' && opened[x-1][y] == 'm' && opened[x-1][y+1] == 'm' && opened[x][y+1] == 'm' && opened[x+1][y+1] == 'm' && opened[x+1][y] == 'm' && opened[x+1][y-1] == 'm')
+                    flag = 1;
+                }
+                if(flag == 1) {
+                  setRandomMinePositions(1);
+                  opened[x][y] = -1;
+                  k = 0;
+                  howManyTimesCorrectedWrongMinePosition++;
+                  break;
+                }
+              }
+            }
+            if(k == 0)
+              break;
+          }
+        }
+        console.log("howManyTimesCorrectedWrongMinePosition >>>====>>>====>>> ",howManyTimesCorrectedWrongMinePosition);
+      };
+      setRandomMinePositionsEvaluator();
 
       function mineFinder(i,j) {
         if(opened[i][j] == 'm')
