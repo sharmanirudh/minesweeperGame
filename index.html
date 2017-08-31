@@ -315,7 +315,7 @@ No. of mines: <input id="noOfMines" type="number" placeholder="Mines">
         var newRandomMinePosition = 0, x = 0, y = 0;
         mineKeeper(mines);
         for(var i = 0; i < mines; i++) {
-          newRandomMinePosition = getRandomMinePositions(0,totalBoxes - 1);
+          newRandomMinePosition = getRandomMinePositions(0,totalBoxes);
           x = parseInt(newRandomMinePosition/boxDimensionY);
           y = newRandomMinePosition%boxDimensionY;
           if(opened[x][y] == 'm') {
